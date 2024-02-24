@@ -2095,11 +2095,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Acer\\Source\\Repos\\Du-An-Tot-Nghiep-\\DaTa\\DaTa.csproj",
+      "projectUniqueName": "C:\\Users\\Acer\\source\\repos\\cllone\\Du-An-Tot-Nghiep\\DaTa\\DaTa.csproj",
       "projectName": "DaTa",
-      "projectPath": "C:\\Users\\Acer\\Source\\Repos\\Du-An-Tot-Nghiep-\\DaTa\\DaTa.csproj",
+      "projectPath": "C:\\Users\\Acer\\source\\repos\\cllone\\Du-An-Tot-Nghiep\\DaTa\\DaTa.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Acer\\Source\\Repos\\Du-An-Tot-Nghiep-\\DaTa\\obj\\",
+      "outputPath": "C:\\Users\\Acer\\source\\repos\\cllone\\Du-An-Tot-Nghiep\\DaTa\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config",
