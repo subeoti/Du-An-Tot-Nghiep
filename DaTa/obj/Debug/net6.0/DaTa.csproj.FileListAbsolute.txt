@@ -54,3 +54,17 @@ C:\Users\Admin\Desktop\New folder\DaTa\bin\Debug\net6.0\DaTa.dll
 C:\Users\Admin\Desktop\New folder\DaTa\bin\Debug\net6.0\DaTa.pdb
 C:\Users\Admin\Desktop\New folder\DaTa\obj\Debug\net6.0\DaTa.genruntimeconfig.cache
 C:\Users\Admin\Desktop\New folder\DaTa\obj\Debug\net6.0\ref\DaTa.dll
+C:\Users\Admin\Desktop\DuANTN\DaTa\bin\Debug\net6.0\DaTa.deps.json
+C:\Users\Admin\Desktop\DuANTN\DaTa\bin\Debug\net6.0\DaTa.runtimeconfig.json
+C:\Users\Admin\Desktop\DuANTN\DaTa\bin\Debug\net6.0\DaTa.dll
+C:\Users\Admin\Desktop\DuANTN\DaTa\bin\Debug\net6.0\DaTa.pdb
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.AssemblyInfo.cs
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.dll
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\refint\DaTa.dll
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.pdb
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\DaTa.genruntimeconfig.cache
+C:\Users\Admin\Desktop\DuANTN\DaTa\obj\Debug\net6.0\ref\DaTa.dll

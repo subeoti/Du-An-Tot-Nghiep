@@ -18,7 +18,9 @@ namespace DaTa.Configurations
         builder.HasKey(x => x.ID);
         builder.Property(x => x.Ten).HasColumnType("nvarchar(500)");
         builder.Property(x => x.MoTa).HasColumnType("nvarchar(50)");
-        builder.Property(x => x.TrangThai).HasColumnType("int");
+            builder.Property(x => x.GiaBan).HasColumnType("int");
+            builder.Property(x => x.NgayTao).HasColumnType("datetime");
+            builder.Property(x => x.TrangThai).HasColumnType("int");
         builder.HasOne(x => x.LoaiSanPham).WithMany(x => x.SanPhams).HasForeignKey(x => x.IDLoaiSP);
         builder.HasOne(x => x.ChatLieu).WithMany(x => x.SanPhams).HasForeignKey(x => x.IDChatLieu);
         builder.HasOne(x => x.NSX).WithMany(x => x.SanPhams).HasForeignKey(x => x.IDNSX);
