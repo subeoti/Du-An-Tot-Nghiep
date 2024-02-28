@@ -4,6 +4,7 @@ using DaTa.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DaTa.Migrations
 {
     [DbContext(typeof(CHGiayDBContext))]
-    partial class CHGiayDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240222045446_1234")]
+    partial class _1234
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +36,9 @@ namespace DaTa.Migrations
 
                     b.Property<Guid>("IDSanPham")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -423,6 +428,9 @@ namespace DaTa.Migrations
                     b.Property<Guid>("IDThuongHieu")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("KhuyenMaiId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Ma")
                         .HasColumnType("nvarchar(max)");
 
@@ -441,13 +449,13 @@ namespace DaTa.Migrations
 
                     b.HasIndex("IDChatLieu");
 
-                    b.HasIndex("IDKhuyenMai");
-
                     b.HasIndex("IDLoaiSP");
 
                     b.HasIndex("IDNSX");
 
                     b.HasIndex("IDThuongHieu");
+
+                    b.HasIndex("KhuyenMaiId");
 
                     b.ToTable("SanPham", (string)null);
                 });
@@ -680,12 +688,6 @@ namespace DaTa.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DaTa.Model.KhuyenMai", "KhuyenMai")
-                        .WithMany("SanPhams")
-                        .HasForeignKey("IDKhuyenMai")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DaTa.Model.LoaiSanPham", "LoaiSanPham")
                         .WithMany("SanPhams")
                         .HasForeignKey("IDLoaiSP")
@@ -701,6 +703,12 @@ namespace DaTa.Migrations
                     b.HasOne("DaTa.Model.ThuongHieu", "ThuongHieu")
                         .WithMany("SanPhams")
                         .HasForeignKey("IDThuongHieu")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DaTa.Model.KhuyenMai", "KhuyenMai")
+                        .WithMany("SanPhams")
+                        .HasForeignKey("KhuyenMaiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

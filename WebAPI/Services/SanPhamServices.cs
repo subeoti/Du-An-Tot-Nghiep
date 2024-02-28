@@ -89,7 +89,7 @@ namespace WebAPI.Services
             return result;
         }
 
-        public async Task<SanPham> SaveSanPham(SanPham tt)
+        public async Task<SanPham> SaveSanPham(SanPhamRequest tt)
         {
             var exist = await dBContext.SanPhams.FindAsync(tt.ID);
             if (exist != null)//Tồn tại
@@ -98,7 +98,24 @@ namespace WebAPI.Services
                 exist.TrangThai = tt.TrangThai;
                 dBContext.SanPhams.Update(exist);
                 await dBContext.SaveChangesAsync();
-               
+                // Giá trị
+                foreach (var gt in tt.Anh)
+                {
+                    // Check TT đã có GT này
+                    var gtr = await dBContext.Anhs.AsNoTracking().Where(c => c.ID == exist.ID && c.ID == gt.ID).FirstOrDefaultAsync();
+
+                    if (gtr == null) // Chưa có -> Tạo GT
+                    {
+                        Anh giaTri = new Anh()
+                        {
+                            ID = new Guid(),
+                            IDSanPham = exist.ID,
+                            AnhSP = gt.AnhSP,
+                        };
+                        await dBContext.Anhs.AddAsync(giaTri);
+                        await dBContext.SaveChangesAsync();
+                    }
+                }
                 return exist;
             }
             else // Chưa có -> Tạo Thuộc tính ms
@@ -117,7 +134,18 @@ namespace WebAPI.Services
                 };
                 await dBContext.SanPhams.AddAsync(thuocTinh);
                 await dBContext.SaveChangesAsync();
-                
+                // Tạo GT
+                foreach (var gt in tt.Anh)
+                {
+                    Anh giaTri = new Anh()
+                    {
+                        ID = new Guid(),
+                        IDSanPham = thuocTinh.ID,
+                        AnhSP = gt.AnhSP,
+                    };
+                    await dBContext.Anhs.AddAsync(giaTri);
+                    await dBContext.SaveChangesAsync();
+                }
                 return thuocTinh;
             }
         }

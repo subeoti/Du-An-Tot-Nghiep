@@ -4,6 +4,7 @@ using DaTa.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DaTa.Migrations
 {
     [DbContext(typeof(CHGiayDBContext))]
-    partial class CHGiayDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240217013736_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,12 +34,15 @@ namespace DaTa.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(200)");
 
-                    b.Property<Guid>("IDSanPham")
+                    b.Property<Guid>("IDSanPhamCT")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("IDSanPham");
+                    b.HasIndex("IDSanPhamCT");
 
                     b.ToTable("Anh", (string)null);
                 });
@@ -402,16 +407,22 @@ namespace DaTa.Migrations
                     b.ToTable("ChiTietPTTT", (string)null);
                 });
 
-            modelBuilder.Entity("DaTa.Model.SanPham", b =>
+            modelBuilder.Entity("DaTa.Model.SanPhamCT", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("GiaBan")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("IDChatLieu")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IDKhuyenMai")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IDKichCo")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IDLoaiSP")
@@ -423,16 +434,14 @@ namespace DaTa.Migrations
                     b.Property<Guid>("IDThuongHieu")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Ma")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Ma")
+                        .HasColumnType("int");
 
-                    b.Property<string>("MoTa")
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<DateTime>("NgayTao")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("Ten")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("SoLuong")
+                        .HasColumnType("int");
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -443,47 +452,13 @@ namespace DaTa.Migrations
 
                     b.HasIndex("IDKhuyenMai");
 
+                    b.HasIndex("IDKichCo");
+
                     b.HasIndex("IDLoaiSP");
 
                     b.HasIndex("IDNSX");
 
                     b.HasIndex("IDThuongHieu");
-
-                    b.ToTable("SanPham", (string)null);
-                });
-
-            modelBuilder.Entity("DaTa.Model.SanPhamCT", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("GiaBan")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("IDKichCo")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Ma")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("NgayTao")
-                        .HasColumnType("datetime");
-
-                    b.Property<Guid?>("SanPhamID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SoLuong")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TrangThai")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("IDKichCo");
-
-                    b.HasIndex("SanPhamID");
 
                     b.ToTable("ChiTietSanPham", (string)null);
                 });
@@ -563,13 +538,13 @@ namespace DaTa.Migrations
 
             modelBuilder.Entity("DaTa.Model.Anh", b =>
                 {
-                    b.HasOne("DaTa.Model.SanPham", "SanPham")
+                    b.HasOne("DaTa.Model.SanPhamCT", "SanPhamCT")
                         .WithMany("Anhs")
-                        .HasForeignKey("IDSanPham")
+                        .HasForeignKey("IDSanPhamCT")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SanPham");
+                    b.Navigation("SanPhamCT");
                 });
 
             modelBuilder.Entity("DaTa.Model.GioHangCT", b =>
@@ -672,34 +647,40 @@ namespace DaTa.Migrations
                     b.Navigation("PhuongThucTT");
                 });
 
-            modelBuilder.Entity("DaTa.Model.SanPham", b =>
+            modelBuilder.Entity("DaTa.Model.SanPhamCT", b =>
                 {
                     b.HasOne("DaTa.Model.ChatLieu", "ChatLieu")
-                        .WithMany("SanPhams")
+                        .WithMany("SanPhamCTs")
                         .HasForeignKey("IDChatLieu")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DaTa.Model.KhuyenMai", "KhuyenMai")
-                        .WithMany("SanPhams")
+                        .WithMany("SanPhamCTs")
                         .HasForeignKey("IDKhuyenMai")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("DaTa.Model.KichCo", "KichCo")
+                        .WithMany("SanPhamCTs")
+                        .HasForeignKey("IDKichCo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("DaTa.Model.LoaiSanPham", "LoaiSanPham")
-                        .WithMany("SanPhams")
+                        .WithMany("SanPhamCTs")
                         .HasForeignKey("IDLoaiSP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DaTa.Model.NSX", "NSX")
-                        .WithMany("SanPhams")
+                        .WithMany("SanPhamCTs")
                         .HasForeignKey("IDNSX")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DaTa.Model.ThuongHieu", "ThuongHieu")
-                        .WithMany("SanPhams")
+                        .WithMany("SanPhamCTs")
                         .HasForeignKey("IDThuongHieu")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -708,6 +689,8 @@ namespace DaTa.Migrations
 
                     b.Navigation("KhuyenMai");
 
+                    b.Navigation("KichCo");
+
                     b.Navigation("LoaiSanPham");
 
                     b.Navigation("NSX");
@@ -715,24 +698,9 @@ namespace DaTa.Migrations
                     b.Navigation("ThuongHieu");
                 });
 
-            modelBuilder.Entity("DaTa.Model.SanPhamCT", b =>
-                {
-                    b.HasOne("DaTa.Model.KichCo", "KichCo")
-                        .WithMany("SanPhamCTs")
-                        .HasForeignKey("IDKichCo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DaTa.Model.SanPham", null)
-                        .WithMany("SanPhamCTs")
-                        .HasForeignKey("SanPhamID");
-
-                    b.Navigation("KichCo");
-                });
-
             modelBuilder.Entity("DaTa.Model.ChatLieu", b =>
                 {
-                    b.Navigation("SanPhams");
+                    b.Navigation("SanPhamCTs");
                 });
 
             modelBuilder.Entity("DaTa.Model.GioHang", b =>
@@ -756,7 +724,7 @@ namespace DaTa.Migrations
 
             modelBuilder.Entity("DaTa.Model.KhuyenMai", b =>
                 {
-                    b.Navigation("SanPhams");
+                    b.Navigation("SanPhamCTs");
                 });
 
             modelBuilder.Entity("DaTa.Model.KichCo", b =>
@@ -766,7 +734,7 @@ namespace DaTa.Migrations
 
             modelBuilder.Entity("DaTa.Model.LoaiSanPham", b =>
                 {
-                    b.Navigation("SanPhams");
+                    b.Navigation("SanPhamCTs");
                 });
 
             modelBuilder.Entity("DaTa.Model.NhanVien", b =>
@@ -776,7 +744,7 @@ namespace DaTa.Migrations
 
             modelBuilder.Entity("DaTa.Model.NSX", b =>
                 {
-                    b.Navigation("SanPhams");
+                    b.Navigation("SanPhamCTs");
                 });
 
             modelBuilder.Entity("DaTa.Model.PhuongThucTT", b =>
@@ -784,15 +752,10 @@ namespace DaTa.Migrations
                     b.Navigation("PhuongThucTTCTs");
                 });
 
-            modelBuilder.Entity("DaTa.Model.SanPham", b =>
+            modelBuilder.Entity("DaTa.Model.SanPhamCT", b =>
                 {
                     b.Navigation("Anhs");
 
-                    b.Navigation("SanPhamCTs");
-                });
-
-            modelBuilder.Entity("DaTa.Model.SanPhamCT", b =>
-                {
                     b.Navigation("GioHangCTs");
 
                     b.Navigation("HoaDonCTs");
@@ -800,7 +763,7 @@ namespace DaTa.Migrations
 
             modelBuilder.Entity("DaTa.Model.ThuongHieu", b =>
                 {
-                    b.Navigation("SanPhams");
+                    b.Navigation("SanPhamCTs");
                 });
 
             modelBuilder.Entity("DaTa.Model.VaiTro", b =>
