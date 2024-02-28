@@ -14,6 +14,8 @@ namespace DaTa.Model
         public string Ten { get; set; }
         public string? Ma { get; set; }
         public string? MoTa { get; set; }
+        public int GiaBan { get; set; }
+        public DateTime NgayTao { get; set; }
         public int TrangThai { get; set; }
         public Guid IDNSX { get; set; }
         public Guid IDThuongHieu { get; set; }

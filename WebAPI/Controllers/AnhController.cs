@@ -49,19 +49,6 @@ namespace WebAPI.Controllers
             return Ok(nv);
         }
 
-        // PUT api/<NhanVienController>/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put(Guid id, string ten, int trangthai)
-        //{
-        //    var bv = await service.UpdateAnh(id, ten, trangthai);
-        //    if (bv == null)
-        //    {
-        //        return BadRequest(); // Trả về BadRequest nếu tên trùng
-        //    }
-
-        //    return Ok(bv);
-        //}
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAnh(Guid id)
         {
