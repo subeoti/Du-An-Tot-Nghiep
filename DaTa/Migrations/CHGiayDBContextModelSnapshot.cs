@@ -408,6 +408,9 @@ namespace DaTa.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("GiaBan")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("IDChatLieu")
                         .HasColumnType("uniqueidentifier");
 
@@ -428,6 +431,9 @@ namespace DaTa.Migrations
 
                     b.Property<string>("MoTa")
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("NgayTao")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Ten")
                         .IsRequired()
@@ -458,20 +464,14 @@ namespace DaTa.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("GiaBan")
-                        .HasColumnType("int");
-
                     b.Property<Guid>("IDKichCo")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IDSanPham")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Ma")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("NgayTao")
-                        .HasColumnType("datetime");
-
-                    b.Property<Guid?>("SanPhamID")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SoLuong")
                         .HasColumnType("int");
@@ -483,7 +483,7 @@ namespace DaTa.Migrations
 
                     b.HasIndex("IDKichCo");
 
-                    b.HasIndex("SanPhamID");
+                    b.HasIndex("IDSanPham");
 
                     b.ToTable("ChiTietSanPham", (string)null);
                 });
@@ -723,11 +723,15 @@ namespace DaTa.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DaTa.Model.SanPham", null)
+                    b.HasOne("DaTa.Model.SanPham", "SanPham")
                         .WithMany("SanPhamCTs")
-                        .HasForeignKey("SanPhamID");
+                        .HasForeignKey("IDSanPham")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("KichCo");
+
+                    b.Navigation("SanPham");
                 });
 
             modelBuilder.Entity("DaTa.Model.ChatLieu", b =>

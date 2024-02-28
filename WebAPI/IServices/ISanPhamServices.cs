@@ -7,7 +7,7 @@ namespace WebAPI.IServices
     {
         Task<List<SanPham>> GetAllSanPham();
         Task<SanPhamRequest> GetByID(Guid idtt);
-        Task<SanPham> SaveSanPham(SanPhamRequest tt);
+        Task<SanPham> SaveSanPham(SanPham tt);
         Task<bool> DeleteSanPham(Guid id);
         Task<bool> CheckTrungTT(SanPhamRequest tt);
     }

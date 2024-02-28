@@ -19,8 +19,8 @@ namespace DaTa.Configurations
             
             builder.Property(x => x.TrangThai).HasColumnType("int");
             builder.HasOne(x => x.KichCo).WithMany(x => x.SanPhamCTs).HasForeignKey(x => x.IDKichCo);
-            //builder.HasOne(x => x.SanPham).WithMany(x => x.SanPhamCTs).HasForeignKey(x => x.IDSanPham);
-           
+            builder.HasOne(x => x.SanPham).WithMany(x => x.SanPhamCTs).HasForeignKey(x => x.IDSanPham);
+
         }
     }
 }

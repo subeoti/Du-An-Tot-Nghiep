@@ -1,6 +1,7 @@
 ﻿using DaTa.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.IServices;
 using WebAPI.Services;
 
@@ -48,20 +49,20 @@ namespace WebAPI.Controllers
             }
             return Ok(nv);
         }
-
-        // PUT api/<NhanVienController>/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put(Guid id, string ten, int trangthai)
-        //{
-        //    var bv = await service.UpdateAnh(id, ten, trangthai);
-        //    if (bv == null)
-        //    {
-        //        return BadRequest(); // Trả về BadRequest nếu tên trùng
-        //    }
-
-        //    return Ok(bv);
-        //}
-
+       
+        [HttpGet]
+        public async Task<IActionResult> GetLoaiSpTheoCha(Guid id)
+        {
+            // Lấy danh sách các theo id sp
+            var anh = await _dbContext.Anhs
+              .Where(a => a.IDSanPham == id)
+              .ToListAsync();
+            if (anh == null)
+            {
+                return BadRequest();
+            }
+            return Ok(anh);
+        }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAnh(Guid id)
         {

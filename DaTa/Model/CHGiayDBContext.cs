@@ -39,7 +39,7 @@ namespace DaTa.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                @"Data Source=DESKTOP-UBD0I1G\SQLEXPRESS;Initial Catalog=DuAnTotNghiep_v1;Integrated Security=True");
+                @"Data Source=DESKTOP-UBD0I1G\SQLEXPRESS;Initial Catalog=DuAnTotNghiep_v11;Integrated Security=True");
 
            
         }
