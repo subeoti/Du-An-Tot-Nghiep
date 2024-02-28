@@ -1,4 +1,5 @@
-﻿using DaTa.ViewModel.NewFolder;
+﻿using DaTa.Model;
+using DaTa.ViewModel.NewFolder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.IServices;
@@ -27,18 +28,21 @@ namespace WebAPI.Controllers
             var result = await _sanPhamService.GetByID(idtt);
             return Ok(result);
         }
-        [HttpGet("checktrung")]
-        public async Task<IActionResult> CheckTrungSP(SanPhamRequest request)
-        {
-            var result = await _sanPhamService.CheckTrungTT(request);
-            return Ok(result);
-        }
+        //[HttpGet("checktrung")]
+        //public async Task<IActionResult> CheckTrungSP(SanPhamRequest request)
+        //{
+        //    var result = await _sanPhamService.CheckTrungTT(request);
+        //    return Ok(result);
+        //}
         [HttpPost("save")]
-        public async Task<IActionResult> CreateOrUpdateThuocTinh(SanPhamRequest Request)
+        public async Task<IActionResult> CreateOrUpdateThuocTinh(string ten, string ma, string mota, int gia, DateTime ngaytao, int trangthai, Guid idnsx, Guid idthieu, Guid idloaisp, Guid idchatlieu, Guid idkhuyenm)
         {
-            if (Request == null) return BadRequest();
-            var tt = await _sanPhamService.SaveSanPham(Request);
-            return Ok(tt);
+            var nv = await _sanPhamService.SaveSanPham(ten, ma,mota, gia, ngaytao, trangthai, idnsx, idthieu, idloaisp, idchatlieu, idkhuyenm);
+            if (nv == null)
+            {
+                return BadRequest();
+            }
+            return Ok(nv);
         }
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> CreateOrUpdateSanPham(Guid id)

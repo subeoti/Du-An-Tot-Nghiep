@@ -49,5 +49,12 @@ namespace WebAPI.IServices
         Task<Anh> UpdateAnh(Guid id, string ten, int trangthai, int giatri, string mota, DateTime ngaybd, DateTime ngaykt);
         Task<List<Anh>> GetAllAnh();
         #endregion
+        #region KichCo
+        Task<KichCo> AddKichCo(string ten, int trangthai);
+        Task<KichCo> GetKichCoById(Guid id);
+        Task<bool> DeleteKichCo(Guid id);
+        Task<KichCo> UpdateKichCo(Guid id, string ten, int trangthai);
+        Task<List<KichCo>> GetAllKichCo();
+        #endregion
     }
 }

@@ -590,6 +590,98 @@ namespace WebAPI.Services
 
             }
         }
+
+
+        #endregion
+        #region KichCo
+        public async Task<KichCo> AddKichCo(string ten, int trangthai)
+        {
+            try
+            {
+                var existingColor = await _context.KichCos.FirstOrDefaultAsync(x => x.Ten.Trim().ToUpper() == ten.Trim().ToUpper());
+                if (existingColor != null)
+                {
+                    return null;
+                }
+                KichCo kc = new KichCo()
+                {
+                    Id = Guid.NewGuid(),
+                    Ten = ten,
+                    TrangThai = 1
+                };
+                _context.KichCos.Add(kc);
+                _context.SaveChanges();
+                return kc;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+        }
+
+        public async Task<KichCo> GetKichCoById(Guid id)
+        {
+            try
+            {
+                var lsp = await _context.KichCos.FirstOrDefaultAsync(nv => nv.Id == id);
+                return lsp;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public Task<bool> DeleteKichCo(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<KichCo> UpdateKichCo(Guid id, string ten, int trangthai)
+        {
+            try
+            {
+                var kc = await _context.KichCos.FirstOrDefaultAsync(x => x.Id == id);
+                if (kc != null)
+                {
+                    var existingColor = await _context.KichCos.FirstOrDefaultAsync(x => x.Ten.Trim().ToUpper() == ten.Trim().ToUpper());
+                    if (existingColor != null)
+                    {
+                        return null; // Trả về null để báo hiệu tên trùng
+                    }
+                    kc.Ten = ten;
+                    kc.TrangThai = 1;
+                    _context.KichCos.Update(kc);
+                    _context.SaveChanges();
+                    return kc;
+                }
+
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<List<KichCo>> GetAllKichCo()
+        {
+            try
+            {
+                return await _context.KichCos.OrderByDescending(x => x.TrangThai).ToListAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+        }
         #endregion
     }
 }
