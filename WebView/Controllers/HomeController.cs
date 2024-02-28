@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WebView.Models;
+using WebVieW.Models;
 
-namespace WebView.Controllers
+namespace WebVieW.Controllers
 {
     public class HomeController : Controller
     {
